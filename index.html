@@ -55,24 +55,38 @@
     .no:hover {
       background-color: #c82333;
     }
+
+    .message {
+      font-size: 18px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Are you interested for this job position?</h1>
+  <div class="container" id="content">
+    <h1 id="question">Are you interested for this job profile?</h1>
     <button class="yes" onclick="handleYes()">Yes</button>
     <button class="no" onclick="handleNo()">No</button>
+    <p class="message" id="message"></p>
   </div>
 
   <script>
     function handleYes() {
-      alert("Awesome! We'll get in touch soon.");
-      // Optionally redirect: window.location.href = "thankyou.html";
+      document.getElementById("question").textContent = "Thank you!";
+      document.getElementById("message").textContent = "Awesome! We'll get in touch soon.";
+      document.querySelectorAll("button").forEach(btn => btn.style.display = "none");
+
+      // Try closing the window after 2 seconds (will only work in pop-ups)
+      setTimeout(() => {
+        window.open('', '_self'); // Fix for some browsers
+        window.close();
+      }, 2000);
     }
 
     function handleNo() {
-      alert("No worries. Thanks for stopping by!");
-      // Optionally redirect: window.location.href = "goodbye.html";
+      document.getElementById("question").textContent = "No worries!";
+      document.getElementById("message").textContent = "Thanks for stopping by!";
+      document.querySelectorAll("button").forEach(btn => btn.style.display = "none");
     }
   </script>
 </body>
